@@ -171,6 +171,20 @@ output name string = dnsResolver.name
 @description('The location the resource was deployed into.')
 output location string = dnsResolver.location
 
+@description('The output from the inbound endpoint submodule.')
+output inboundEndpointsOutput array = [for (item, index) in (inboundEndpoints ?? []): {
+  name: dnsResolver_inboundEndpoints[index].outputs.name
+  resourceId: dnsResolver_inboundEndpoints[index].outputs.resourceId
+  resourceGroupName: dnsResolver_inboundEndpoints[index].outputs.resourceGroupName
+}]
+
+@description('The output from the outbound endpoint submodule.')
+output outboundEndpointsOutput array = [for (item, index) in (outboundEndpoints ?? []): {
+  name: dnsResolver_outboundEndpoints[index].outputs.name
+  resourceId: dnsResolver_outboundEndpoints[index].outputs.resourceId
+  resourceGroupName: dnsResolver_outboundEndpoints[index].outputs.resourceGroupName
+}]
+
 // ================ //
 // Definitions      //
 // ================ //
